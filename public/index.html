@@ -1,1 +1,162 @@
 
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#123d32">
+  <title>Laivenieki – Kreisais krasts</title>
+  <meta name="description" content="Atpūtas vieta Laivenieki – Kreisais krasts. Daba, ūdens un atelpa.">
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f5ef;
+      color: #20342c;
+    }
+    header {
+      background: #123d32;
+      color: white;
+      padding: 20px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    header h2 { margin: 0; }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 18px;
+    }
+    .hero {
+      min-height: 440px;
+      padding: 100px 8%;
+      color: white;
+      text-align: center;
+      background: linear-gradient(135deg, #174c3b, #56866a);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .hero h1 { font-size: clamp(38px, 7vw, 68px); margin: 0 0 15px; }
+    .hero p { font-size: 21px; }
+    .button {
+      display: inline-block;
+      background: #e7c77b;
+      color: #20342c;
+      padding: 14px 24px;
+      border-radius: 7px;
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+    section { padding: 65px 8%; }
+    .intro { text-align: center; max-width: 850px; margin: auto; }
+    h2 { color: #174c3b; }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 22px;
+      margin-top: 30px;
+    }
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px #00000010;
+    }
+    .card h3 { color: #286348; }
+    .contact {
+      background: #e5eade;
+      text-align: center;
+    }
+    .contact a { color: #174c3b; }
+    footer {
+      background: #123d32;
+      color: white;
+      text-align: center;
+      padding: 25px;
+    }
+    @media(max-width: 600px) {
+      header { justify-content: center; text-align: center; }
+      nav a { margin: 0 7px; }
+      .hero { padding: 75px 6%; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h2>LAIVENIEKI</h2>
+    <nav>
+      <a href="#par">Par mums</a>
+      <a href="#iespejas">Iespējas</a>
+      <a href="#kontakti">Kontakti</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="hero">
+      <h1>Laivenieki – Kreisais krasts</h1>
+      <p>Daba. Ūdens. Atelpa.</p>
+      <a class="button" href="#iespejas">Atklāt vairāk</a>
+    </div>
+
+    <section id="par">
+      <div class="intro">
+        <h2>Laipni lūgti Laiveniekos!</h2>
+        <p>
+          Atpūtas vieta dabas un ūdens tuvumā.
+          Vieta, kur izbaudīt mieru, pavadīt laiku pie dabas
+          un atvilkt elpu no ikdienas steigas.
+        </p>
+      </div>
+    </section>
+
+    <section id="iespejas">
+      <div class="intro">
+        <h2>Ko iespējams baudīt?</h2>
+        <div class="cards">
+          <div class="card">
+            <h3>🚣 Laivošana</h3>
+            <p>Izbaudi ūdeni un apkārtējo dabu.</p>
+          </div>
+          <div class="card">
+            <h3>🎣 Makšķerēšana</h3>
+            <p>Pavadi mierīgu laiku pie ūdens.</p>
+          </div>
+          <div class="card">
+            <h3>🌿 Atpūta dabā</h3>
+            <p>Izbaudi apkārtnes skaistumu un mieru.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="kontakti">
+      <h2>Kontakti</h2>
+      <p>Atpūtas vieta LAIVENIEKI – Kreisais krasts</p>
+      <p>Tālrunis: <a href="tel:+37129987004">+371 29 987 004</a></p>
+      <p>
+        <a href="https://www.google.com/maps/search/?api=1&query=Atputa+vieta+Laivenieki+Kreisais+krasts" target="_blank" rel="noopener">
+          Apskatīt atrašanās vietu kartē
+        </a>
+      </p>
+      <p>
+        <a href="https://www.facebook.com/search/pages/?q=Laivenieki%20Kreisais%20Krasts" target="_blank" rel="noopener">
+          Meklēt Facebook
+        </a>
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    © Laivenieki – Kreisais krasts
+  </footer>
+</body>
+</html>
+
