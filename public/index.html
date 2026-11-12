@@ -2,161 +2,239 @@
 <!DOCTYPE html>
 <html lang="lv">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#123d32">
-  <title>Laivenieki – Kreisais krasts</title>
-  <meta name="description" content="Atpūtas vieta Laivenieki – Kreisais krasts. Daba, ūdens un atelpa.">
-  <style>
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f4f5ef;
-      color: #20342c;
-    }
-    header {
-      background: #123d32;
-      color: white;
-      padding: 20px 8%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 15px;
-    }
-    header h2 { margin: 0; }
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin-left: 18px;
-    }
-    .hero {
-      min-height: 440px;
-      padding: 100px 8%;
-      color: white;
-      text-align: center;
-      background: linear-gradient(135deg, #174c3b, #56866a);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-    .hero h1 { font-size: clamp(38px, 7vw, 68px); margin: 0 0 15px; }
-    .hero p { font-size: 21px; }
-    .button {
-      display: inline-block;
-      background: #e7c77b;
-      color: #20342c;
-      padding: 14px 24px;
-      border-radius: 7px;
-      text-decoration: none;
-      font-weight: bold;
-      margin-top: 15px;
-    }
-    section { padding: 65px 8%; }
-    .intro { text-align: center; max-width: 850px; margin: auto; }
-    h2 { color: #174c3b; }
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 22px;
-      margin-top: 30px;
-    }
-    .card {
-      background: white;
-      padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0 4px 16px #00000010;
-    }
-    .card h3 { color: #286348; }
-    .contact {
-      background: #e5eade;
-      text-align: center;
-    }
-    .contact a { color: #174c3b; }
-    footer {
-      background: #123d32;
-      color: white;
-      text-align: center;
-      padding: 25px;
-    }
-    @media(max-width: 600px) {
-      header { justify-content: center; text-align: center; }
-      nav a { margin: 0 7px; }
-      .hero { padding: 75px 6%; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#102d25">
+<title>Laivenieki KK | Atpūta pie Liepājas ezera</title>
+<meta name="description" content="Laivenieki KK — laivu un SUP noma, laivu ielaišanas vieta un atpūta pie Liepājas ezera.">
+<style>
+:root {
+  --green:#102d25;
+  --green2:#1c4938;
+  --gold:#d8b875;
+  --cream:#f5f3ec;
+  --white:#fff;
+}
+* {box-sizing:border-box}
+html {scroll-behavior:smooth}
+body {
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:var(--cream);
+  color:#20342c;
+}
+header {
+  position:sticky;top:0;z-index:10;
+  display:flex;justify-content:space-between;
+  align-items:center;gap:20px;
+  padding:18px 8%;
+  background:var(--green);
+  color:white;
+}
+.logo {font-size:23px;font-weight:800;letter-spacing:3px}
+nav {display:flex;gap:24px;flex-wrap:wrap}
+nav a {color:white;text-decoration:none;font-size:14px}
+nav a:hover {color:var(--gold)}
+.hero {
+  min-height:600px;
+  display:flex;align-items:center;
+  padding:90px 10%;
+  color:white;
+  background:
+    linear-gradient(90deg,rgba(8,30,23,.9),rgba(8,30,23,.35)),
+    linear-gradient(135deg,#173e31,#60816b);
+}
+.hero-content {max-width:720px}
+.eyebrow {
+  color:var(--gold);letter-spacing:4px;
+  text-transform:uppercase;font-size:12px;font-weight:bold
+}
+h1 {font-size:clamp(42px,7vw,78px);line-height:1.05;margin:20px 0}
+.hero p {font-size:19px;line-height:1.7;max-width:570px;color:#e6eee8}
+.btn {
+  display:inline-block;padding:15px 25px;
+  background:var(--gold);color:var(--green);
+  text-decoration:none;font-weight:bold;
+  border-radius:4px;margin:12px 10px 0 0;
+  transition:.25s
+}
+.btn:hover {transform:translateY(-3px);background:#eed49a}
+.btn-outline {background:transparent;color:white;border:1px solid white}
+section {padding:85px 9%}
+.heading {text-align:center;max-width:720px;margin:0 auto 45px}
+.heading span {color:#9b7c42;text-transform:uppercase;letter-spacing:3px;font-size:12px;font-weight:bold}
+h2 {font-size:clamp(30px,4vw,43px);color:var(--green);margin:14px 0}
+.heading p {line-height:1.8;color:#66736c}
+.cards {
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:22px
+}
+.card {
+  background:white;padding:32px 27px;border-radius:8px;
+  box-shadow:0 10px 30px #102d2510;
+  transition:.25s
+}
+.card:hover {transform:translateY(-6px)}
+.card .symbol {font-size:32px}
+.card h3 {color:var(--green);font-size:21px}
+.card p {color:#69766e;line-height:1.7}
+.dark {background:var(--green);color:white}
+.dark h2 {color:white}
+.dark .heading p {color:#c6d2ca}
+.gallery {
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:15px
+}
+.gallery a {
+  min-height:190px;border-radius:8px;
+  display:flex;align-items:end;padding:20px;
+  text-decoration:none;color:white;
+  background:linear-gradient(145deg,#254c3b,#829477);
+  transition:.25s
+}
+.gallery a:hover {transform:scale(1.02)}
+.gallery strong {font-size:17px}
+.gallery-note {
+  text-align:center;color:#c6d2ca;
+  margin:25px auto 0;line-height:1.7
+}
+.contact {text-align:center}
+.contact p {line-height:1.8;color:#66736c}
+.contact a:not(.btn) {color:var(--green);font-weight:bold}
+footer {
+  background:#091d17;color:#b9c8bf;
+  padding:28px 8%;text-align:center;font-size:13px
+}
+.reveal {animation:appear .8s ease both}
+@keyframes appear {
+  from {opacity:0;transform:translateY(20px)}
+  to {opacity:1;transform:translateY(0)}
+}
+@media(max-width:700px) {
+  header {flex-direction:column;padding:16px 5%}
+  nav {justify-content:center;gap:15px}
+  .hero {min-height:520px;padding:70px 7%}
+  section {padding:65px 7%}
+  .gallery {grid-template-columns:1fr}
+  .gallery a {min-height:150px}
+}
+</style>
 </head>
 <body>
-  <header>
-    <h2>LAIVENIEKI</h2>
-    <nav>
-      <a href="#par">Par mums</a>
-      <a href="#iespejas">Iespējas</a>
-      <a href="#kontakti">Kontakti</a>
-    </nav>
-  </header>
 
-  <main>
-    <div class="hero">
-      <h1>Laivenieki – Kreisais krasts</h1>
-      <p>Daba. Ūdens. Atelpa.</p>
-      <a class="button" href="#iespejas">Atklāt vairāk</a>
-    </div>
+<header>
+  <div class="logo">LAIVENIEKI KK</div>
+  <nav>
+    <a href="#par">Par mums</a>
+    <a href="#iespejas">Iespējas</a>
+    <a href="#galerija">Galerija</a>
+    <a href="#kontakti">Kontakti</a>
+  </nav>
+</header>
 
-    <section id="par">
-      <div class="intro">
-        <h2>Laipni lūgti Laiveniekos!</h2>
-        <p>
-          Atpūtas vieta dabas un ūdens tuvumā.
-          Vieta, kur izbaudīt mieru, pavadīt laiku pie dabas
-          un atvilkt elpu no ikdienas steigas.
-        </p>
-      </div>
-    </section>
+<main>
+<div class="hero">
+  <div class="hero-content reveal">
+    <div class="eyebrow">Liepājas ezera krastā</div>
+    <h1>Daba. Ūdens. Piedzīvojumi.</h1>
+    <p>
+      Atklāj atpūtas iespējas pie Liepājas ezera.
+      Izbaudi ūdeni, makšķerēšanu un skaistus mirkļus dabā.
+    </p>
+    <a class="btn" href="#iespejas">Atklāt iespējas</a>
+    <a class="btn btn-outline" href="tel:+37129987004">Sazināties</a>
+  </div>
+</div>
 
-    <section id="iespejas">
-      <div class="intro">
-        <h2>Ko iespējams baudīt?</h2>
-        <div class="cards">
-          <div class="card">
-            <h3>🚣 Laivošana</h3>
-            <p>Izbaudi ūdeni un apkārtējo dabu.</p>
-          </div>
-          <div class="card">
-            <h3>🎣 Makšķerēšana</h3>
-            <p>Pavadi mierīgu laiku pie ūdens.</p>
-          </div>
-          <div class="card">
-            <h3>🌿 Atpūta dabā</h3>
-            <p>Izbaudi apkārtnes skaistumu un mieru.</p>
-          </div>
-        </div>
-      </div>
-    </section>
+<section id="par">
+  <div class="heading">
+    <span>Laipni lūgti</span>
+    <h2>Laivenieki – Kreisais krasts</h2>
+    <p>
+      Atpūtas vieta pie Liepājas ezera, kur iespējams
+      baudīt ūdens aktivitātes un pavadīt laiku dabā.
+      Laipni gaidīti makšķernieki un ģimenes!
+    </p>
+  </div>
+</section>
 
-    <section class="contact" id="kontakti">
-      <h2>Kontakti</h2>
-      <p>Atpūtas vieta LAIVENIEKI – Kreisais krasts</p>
-      <p>Tālrunis: <a href="tel:+37129987004">+371 29 987 004</a></p>
-      <p>
-        <a href="https://www.google.com/maps/search/?api=1&query=Atputa+vieta+Laivenieki+Kreisais+krasts" target="_blank" rel="noopener">
-          Apskatīt atrašanās vietu kartē
-        </a>
-      </p>
-      <p>
-        <a href="https://www.facebook.com/search/pages/?q=Laivenieki%20Kreisais%20Krasts" target="_blank" rel="noopener">
-          Meklēt Facebook
-        </a>
-      </p>
-    </section>
-  </main>
+<section id="iespejas">
+  <div class="heading">
+    <span>Ko piedāvājam</span>
+    <h2>Atpūta un aktivitātes</h2>
+    <p>Izvēlies savu veidu, kā izbaudīt laiku pie ūdens.</p>
+  </div>
+  <div class="cards">
+    <article class="card">
+      <div class="symbol">🚣</div>
+      <h3>Laivu noma</h3>
+      <p>Dodieties izbraucienā pa Liepājas ezera ūdeņiem.</p>
+    </article>
+    <article class="card">
+      <div class="symbol">🌊</div>
+      <h3>SUP noma</h3>
+      <p>Izbaudi ūdeni un apkārtējo ainavu uz SUP dēļa.</p>
+    </article>
+    <article class="card">
+      <div class="symbol">🎣</div>
+      <h3>Makšķerēšana</h3>
+      <p>Atpūta un makšķerēšanas prieks pie ezera.</p>
+    </article>
+    <article class="card">
+      <div class="symbol">🛶</div>
+      <h3>Laivu ielaišana</h3>
+      <p>Laivu ielaišanas vieta Liepājas ezera apkārtnē.</p>
+    </article>
+  </div>
+</section>
 
-  <footer>
-    © Laivenieki – Kreisais krasts
-  </footer>
+<section class="dark" id="galerija">
+  <div class="heading">
+    <span>Foto mirkļi</span>
+    <h2>Laivenieku galerija</h2>
+    <p>
+      Apskati īstās fotogrāfijas un jaunākos notikumus
+      Laivenieku Facebook lapā.
+    </p>
+  </div>
+  <div class="gallery">
+    <a href="https://www.facebook.com/search/pages/?q=Atp%C5%ABtas%20vieta%20Laivenieki%20KK">
+      <strong>🌿 Daba un apkārtne ↗</strong>
+    </a>
+    <a href="https://www.facebook.com/search/pages/?q=Atp%C5%ABtas%20vieta%20Laivenieki%20KK">
+      <strong>🚣 Laivas un ūdens ↗</strong>
+    </a>
+    <a href="https://www.facebook.com/search/pages/?q=Atp%C5%ABtas%20vieta%20Laivenieki%20KK">
+      <strong>🎣 Makšķerēšana ↗</strong>
+    </a>
+  </div>
+  <p class="gallery-note">
+    Vairāk fotoattēlu un jaunumu meklē mūsu Facebook lapā.
+  </p>
+  <div style="text-align:center">
+    <a class="btn" href="https://www.facebook.com/search/pages/?q=Atp%C5%ABtas%20vieta%20Laivenieki%20KK">
+      Skatīt Facebook
+    </a>
+  </div>
+</section>
+
+<section class="contact" id="kontakti">
+  <div class="heading">
+    <span>Sazinies ar mums</span>
+    <h2>Plāno savu atpūtu!</h2>
+    <p>Jautājumiem un rezervācijām sazinies ar Laiveniekiem.</p>
+  </div>
+  <p><strong>Atpūtas vieta Laivenieki KK</strong></p>
+  <p>Tālrunis: <a href="tel:+37129987004">+371 29 987 004</a></p>
+  <a class="btn" href="tel:+37129987004">Zvanīt</a>
+  <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Atputa+vieta+Laivenieki+Kreisais+krasts">Atrašanās vieta</a>
+</section>
+</main>
+
+<footer>
+  © 2026 Laivenieki KK · Daba. Ūdens. Piedzīvojumi.
+</footer>
 </body>
 </html>
+
 
