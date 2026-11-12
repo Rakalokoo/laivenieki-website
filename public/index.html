@@ -1,598 +1,226 @@
-
 <!DOCTYPE html>
 <html lang="lv">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#102d25">
-<title>Laivenieki KK | Atpūta pie Liepājas ezera</title>
-<meta name="description" content="Laivenieki KK — laivu noma un atpūta pie Liepājas ezera.">
-
+<meta name="theme-color" content="#10271f">
+<title>Laivenieki KK — Atpūta pie Liepājas ezera</title>
+<meta name="description" content="Laivenieki KK — laivu un SUP noma, makšķerēšana un atpūta pie Liepājas ezera.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --green:#102d25;
-  --green2:#1c4938;
-  --gold:#d8b875;
-  --cream:#f5f3ec;
-}
-* {box-sizing:border-box}
-html {scroll-behavior:smooth}
-body {
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:var(--cream);
-  color:#20342c;
-}
-body.viewer-open {overflow:hidden}
-
-/* HEADER */
-header {
-  position:sticky;
-  top:0;
-  z-index:10;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:20px;
-  padding:18px 8%;
-  background:var(--green);
-  color:white;
-}
-.logo {
-  font-size:23px;
-  font-weight:800;
-  letter-spacing:3px;
-}
-nav {
-  display:flex;
-  gap:20px;
-  flex-wrap:wrap;
-}
-nav a {
-  color:white;
-  text-decoration:none;
-  font-size:14px;
-  transition:.2s;
-}
-nav a:hover {color:var(--gold)}
-
-/* HERO */
-.hero {
-  min-height:600px;
-  display:flex;
-  align-items:center;
-  padding:90px 10%;
-  color:white;
-  background:linear-gradient(135deg,#173e31,#60816b);
-}
-.hero-content {max-width:720px}
-.eyebrow {
-  color:var(--gold);
-  letter-spacing:4px;
-  text-transform:uppercase;
-  font-size:12px;
-  font-weight:bold;
-}
-h1 {
-  font-size:clamp(42px,7vw,78px);
-  line-height:1.05;
-  margin:20px 0;
-}
-.hero p {
-  font-size:19px;
-  line-height:1.7;
-  max-width:570px;
-  color:#e6eee8;
-}
-.btn {
-  display:inline-block;
-  padding:15px 25px;
-  background:var(--gold);
-  color:var(--green);
-  text-decoration:none;
-  font-weight:bold;
-  border-radius:4px;
-  margin:12px 10px 0 0;
-  transition:.25s;
-}
-.btn:hover {
-  transform:translateY(-3px);
-  background:#eed49a;
-}
-.btn-outline {
-  background:transparent;
-  color:white;
-  border:1px solid white;
-}
-
-/* SECTIONS */
-section {padding:85px 9%}
-.heading {
-  text-align:center;
-  max-width:720px;
-  margin:0 auto 45px;
-}
-.heading span {
-  color:#9b7c42;
-  text-transform:uppercase;
-  letter-spacing:3px;
-  font-size:12px;
-  font-weight:bold;
-}
-h2 {
-  font-size:clamp(30px,4vw,43px);
-  color:var(--green);
-  margin:14px 0;
-}
-.heading p {
-  line-height:1.8;
-  color:#66736c;
-}
-
-/* ACTIVITY CARDS */
-.cards {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:22px;
-}
-.card {
-  background:white;
-  padding:32px 27px;
-  border-radius:8px;
-  box-shadow:0 10px 30px #102d2510;
-  transition:.25s;
-}
-.card:hover {transform:translateY(-6px)}
-.card .symbol {font-size:32px}
-.card h3 {
-  color:var(--green);
-  font-size:21px;
-}
-.card p {
-  color:#69766e;
-  line-height:1.7;
-}
-
-/* GALLERY */
-.dark {
-  background:var(--green);
-  color:white;
-}
-.dark h2 {color:white}
-.dark .heading p {color:#c6d2ca}
-
-.gallery {
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:18px;
-}
-.gallery-item {
-  display:block;
-  overflow:hidden;
-  border:0;
-  padding:0;
-  border-radius:9px;
-  background:#254c3b;
-  aspect-ratio:4/3;
-  cursor:pointer;
-}
-.gallery-item img {
-  display:block;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  transition:transform .4s ease;
-}
-.gallery-item:hover img {
-  transform:scale(1.07);
-}
-
-/* PHOTO VIEWER */
-.viewer {
-  display:none;
-  position:fixed;
-  inset:0;
-  z-index:1000;
-  background:rgba(0,0,0,.94);
-  align-items:center;
-  justify-content:center;
-  padding:65px 65px 45px;
-}
-.viewer.active {display:flex}
-.viewer-content {
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  width:100%;
-  height:100%;
-}
-.viewer img {
-  max-width:100%;
-  max-height:80vh;
-  object-fit:contain;
-  border-radius:5px;
-}
-.viewer-count {
-  color:white;
-  margin-top:15px;
-  font-size:14px;
-}
-.viewer-close,
-.viewer-prev,
-.viewer-next {
-  position:absolute;
-  border:0;
-  background:rgba(255,255,255,.13);
-  color:white;
-  cursor:pointer;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  transition:.2s;
-}
-.viewer-close:hover,
-.viewer-prev:hover,
-.viewer-next:hover {
-  background:var(--gold);
-  color:var(--green);
-}
-.viewer-close {
-  top:18px;
-  right:25px;
-  width:48px;
-  height:48px;
-  font-size:30px;
-}
-.viewer-prev,
-.viewer-next {
-  top:50%;
-  transform:translateY(-50%);
-  width:48px;
-  height:48px;
-  font-size:30px;
-}
-.viewer-prev {left:15px}
-.viewer-next {right:15px}
-
-/* CONTACT */
-.contact {text-align:center}
-.contact p {
-  line-height:1.8;
-  color:#66736c;
-}
-.contact a:not(.btn) {
-  color:var(--green);
-  font-weight:bold;
-}
-
-/* FOOTER */
-footer {
-  background:#091d17;
-  color:#b9c8bf;
-  padding:28px 8%;
-  text-align:center;
-  font-size:13px;
-}
-footer a {
-  color:var(--gold);
-  text-decoration:none;
-}
-
-/* ANIMATION */
-.reveal {animation:appear .8s ease both}
-@keyframes appear {
-  from {opacity:0;transform:translateY(20px)}
-  to {opacity:1;transform:translateY(0)}
-}
-
-/* MOBILE */
-@media(max-width:700px) {
-  header {
-    flex-direction:column;
-    padding:16px 5%;
-  }
-  nav {
-    justify-content:center;
-    gap:13px;
-  }
-  nav a {font-size:13px}
-  .hero {
-    min-height:520px;
-    padding:70px 7%;
-  }
-  section {padding:65px 7%}
-  .gallery {
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:10px;
-  }
-  .viewer {padding:65px 12px 35px}
-  .viewer img {max-height:75vh}
-  .viewer-prev {left:5px}
-  .viewer-next {right:5px}
-}
-@media(max-width:400px) {
-  .gallery {grid-template-columns:1fr}
-}
+:root{--forest:#10271f;--forest2:#1d4031;--sage:#dce5d9;--gold:#d7b779;--cream:#f6f5ef;--ink:#1c3027;--muted:#68766d;--white:#fff}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:"DM Sans",Arial,sans-serif}
+body.viewer-open{overflow:hidden}
+a{color:inherit}
+.topline{background:#0a1c16;color:#d5dfd8;padding:9px 6%;display:flex;justify-content:space-between;gap:14px;font-size:12px;letter-spacing:.06em}
+.topline a{color:var(--gold);text-decoration:none}
+header{position:sticky;top:0;z-index:30;background:rgba(16,39,31,.96);backdrop-filter:blur(14px);color:white;border-bottom:1px solid #ffffff18}
+.nav-wrap{max-width:1400px;margin:auto;padding:0 6%;min-height:82px;display:flex;align-items:center;justify-content:space-between;gap:28px}
+.brand{display:flex;align-items:center;gap:13px;text-decoration:none;white-space:nowrap}
+.brand-mark{width:43px;height:43px;border:1px solid #d7b779;display:grid;place-items:center;color:var(--gold);font-family:"Playfair Display",serif;font-size:22px;border-radius:50%}
+.brand-name{font-size:15px;letter-spacing:.18em;font-weight:700}
+.brand-sub{display:block;font-size:9px;letter-spacing:.2em;color:#b7c6bc;margin-top:4px}
+nav{display:flex;align-items:center;gap:clamp(13px,2.2vw,30px)}
+nav a{font-size:12px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:#e9eee9;transition:color .2s}
+nav a:hover{color:var(--gold)}
+nav .nav-cta{border:1px solid #d7b779;color:var(--gold);padding:12px 17px}
+.hero{min-height:min(790px,calc(100vh - 110px));position:relative;display:flex;align-items:center;overflow:hidden;color:white;background:#213c30 url("682239853_122298478886218460_8656357292084412713_n.jpg") center 48%/cover no-repeat}
+.hero:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(6,22,16,.88) 0%,rgba(8,28,20,.68) 47%,rgba(8,28,20,.12) 100%),linear-gradient(0deg,rgba(5,18,13,.38),transparent 45%)}
+.hero-inner{position:relative;z-index:1;width:min(1200px,88%);margin:0 auto;padding:100px 0 130px}
+.kicker{display:flex;align-items:center;gap:13px;color:var(--gold);font-size:11px;letter-spacing:.28em;text-transform:uppercase;font-weight:700}
+.kicker:before{content:"";width:42px;height:1px;background:var(--gold)}
+h1,h2,h3{font-family:"Playfair Display",Georgia,serif;font-weight:600}
+h1{font-size:clamp(54px,8vw,104px);line-height:.99;letter-spacing:-.035em;max-width:800px;margin:28px 0 24px}
+.hero-copy{font-size:17px;line-height:1.85;color:#e2e9e3;max-width:510px}
+.actions{display:flex;flex-wrap:wrap;gap:13px;margin-top:34px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;padding:16px 23px;text-decoration:none;text-transform:uppercase;letter-spacing:.1em;font-size:11px;font-weight:700;transition:transform .2s,background .2s,border .2s}
+.btn:hover{transform:translateY(-3px)}
+.btn-gold{background:var(--gold);color:#17291f}
+.btn-gold:hover{background:#ead19f}
+.btn-glass{border:1px solid #ffffff80;color:white;background:#ffffff0d}
+.btn-glass:hover{border-color:var(--gold);color:var(--gold)}
+.hero-note{position:absolute;right:6%;bottom:35px;z-index:1;color:#e3e8e3;font-size:10px;letter-spacing:.22em;text-transform:uppercase;writing-mode:vertical-rl}
+.quickbar{background:var(--forest2);color:#f4f3e9}
+.quickbar-inner{max-width:1200px;margin:auto;padding:24px 6%;display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.quick-item{display:flex;align-items:center;justify-content:center;gap:12px;border-right:1px solid #ffffff2b}
+.quick-item:last-child{border:0}
+.quick-icon{color:var(--gold);font-size:20px}
+.quick-item span:last-child{font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+section{padding:110px 6%}
+.section-inner{max-width:1200px;margin:auto}
+.section-label{color:#9b7941;text-transform:uppercase;letter-spacing:.25em;font-size:10px;font-weight:700}
+.section-title{font-size:clamp(38px,5vw,58px);line-height:1.1;color:var(--forest);margin:17px 0 20px}
+.section-intro{font-size:15px;line-height:1.9;color:var(--muted);max-width:650px}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:8%;align-items:center}
+.about-copy{padding:15px 0}
+.about-photo{position:relative;min-height:490px}
+.about-photo img{width:100%;height:490px;object-fit:cover;display:block}
+.photo-frame{position:absolute;inset:18px -18px -18px 18px;border:1px solid var(--gold);z-index:-1}
+.about-tag{display:inline-block;margin-top:28px;padding:13px 18px;border-left:2px solid var(--gold);background:#ebece4;color:#42554a;font-size:12px;letter-spacing:.08em}
+.activities{background:#eceee7}
+.center-head{text-align:center;margin:0 auto 55px;max-width:700px}
+.center-head .section-intro{margin:0 auto}
+.activity-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.activity{background:#fff;padding:34px 25px 32px;min-height:255px;border:1px solid #e4e7df;transition:transform .25s,box-shadow .25s}
+.activity:hover{transform:translateY(-7px);box-shadow:0 20px 40px #17291f12}
+.activity-icon{width:48px;height:48px;border:1px solid #d6c29b;color:#927344;display:grid;place-items:center;font-size:22px;margin-bottom:26px}
+.activity h3{font-size:23px;color:var(--forest);margin:0 0 12px}
+.activity p{font-size:13px;line-height:1.8;color:var(--muted);margin:0}
+.gallery-section{background:var(--forest);color:white}
+.gallery-section .section-title{color:white}
+.gallery-section .section-intro{color:#c3d0c6}
+.gallery-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:42px}
+.gallery-head .section-intro{max-width:390px}
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
+.gallery-item{position:relative;display:block;overflow:hidden;border:0;padding:0;aspect-ratio:1.34;background:#294738;cursor:pointer}
+.gallery-item:after{content:"";position:absolute;inset:0;border:1px solid #ffffff20;pointer-events:none}
+.gallery-item img{width:100%;height:100%;display:block;object-fit:cover;transition:transform .55s,opacity .3s}
+.gallery-item:hover img{transform:scale(1.055);opacity:.82}
+.gallery-item:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.gallery-more{text-align:center;margin-top:35px;color:#c5d0c8;font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.contact-section{background:#f7f6f0}
+.contact-panel{background:var(--forest);color:white;display:grid;grid-template-columns:1.2fr .8fr;gap:40px;padding:clamp(35px,6vw,75px);position:relative;overflow:hidden}
+.contact-panel:after{content:"L";position:absolute;right:30px;bottom:-125px;font-family:"Playfair Display",serif;font-size:340px;color:#ffffff08;pointer-events:none}
+.contact-panel h2{font-size:clamp(38px,5vw,58px);line-height:1.1;margin:16px 0}
+.contact-panel p{color:#c8d4cb;line-height:1.8;font-size:14px;max-width:520px}
+.contact-details{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:center;gap:18px}
+.detail{border-bottom:1px solid #ffffff26;padding-bottom:16px}
+.detail small{display:block;color:var(--gold);font-size:10px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:8px}
+.detail a,.detail span{font-size:17px;text-decoration:none;color:white}
+.contact-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+footer{background:#091b14;color:#aebdb2;padding:28px 6%;font-size:11px;letter-spacing:.06em}
+.footer-inner{max-width:1200px;margin:auto;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer a{color:var(--gold);text-decoration:none}
+.viewer{display:none;position:fixed;inset:0;z-index:1000;background:rgba(3,10,7,.97);align-items:center;justify-content:center;padding:65px}
+.viewer.active{display:flex}
+.viewer-content{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%}
+.viewer img{max-width:100%;max-height:82vh;object-fit:contain}
+.viewer-count{color:#dce5dd;margin-top:17px;font-size:12px;letter-spacing:.16em}
+.viewer-close,.viewer-prev,.viewer-next{position:absolute;border:1px solid #ffffff50;background:#ffffff12;color:white;cursor:pointer;display:grid;place-items:center;width:48px;height:48px;border-radius:50%;font-size:27px;transition:.2s}
+.viewer-close:hover,.viewer-prev:hover,.viewer-next:hover{background:var(--gold);color:var(--forest)}
+.viewer-close{top:20px;right:24px}.viewer-prev{left:22px;top:50%;transform:translateY(-50%)}.viewer-next{right:22px;top:50%;transform:translateY(-50%)}
+@media(max-width:900px){.nav-wrap{padding:0 4%;gap:15px}nav{gap:13px}nav a{font-size:10px}.activity-grid{grid-template-columns:repeat(2,1fr)}.about-grid{gap:5%}.quickbar-inner{padding-left:3%;padding-right:3%}}
+@media(max-width:650px){.topline{justify-content:center}.topline span:first-child{display:none}.nav-wrap{min-height:auto;padding:16px 5%;flex-direction:column}.brand{align-self:center}nav{justify-content:center;flex-wrap:wrap;gap:12px 17px}nav .nav-cta{padding:8px 10px}.hero{min-height:650px;background-position:58% center}.hero:before{background:linear-gradient(90deg,rgba(6,22,16,.88),rgba(8,28,20,.48)),linear-gradient(0deg,rgba(5,18,13,.4),transparent)}.hero-inner{width:88%;padding:85px 0 105px}.hero-note{display:none}.quickbar-inner{grid-template-columns:repeat(2,1fr);gap:0;padding:12px 5%}.quick-item{padding:15px 4px;justify-content:flex-start;border-right:0}.quick-item span:last-child{font-size:9px}section{padding:75px 6%}.about-grid{grid-template-columns:1fr;gap:40px}.about-photo,.about-photo img{min-height:320px;height:320px}.photo-frame{inset:12px -10px -12px 12px}.gallery-head{display:block}.gallery-head .section-intro{margin-top:15px}.gallery{grid-template-columns:repeat(2,1fr);gap:8px}.contact-panel{grid-template-columns:1fr;gap:28px}.viewer{padding:60px 12px 35px}.viewer-prev{left:7px}.viewer-next{right:7px}}
+@media(max-width:390px){.activity-grid{grid-template-columns:1fr}.gallery{grid-template-columns:1fr}.brand-name{font-size:13px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
 </style>
 </head>
-
 <body>
-
+<div class="topline"><span>ATPŪTA PIE LIEPĀJAS EZERA</span><span>Jautājumiem: <a href="tel:+37129987004">+371 29 987 004</a></span></div>
 <header>
-  <div class="logo">LAIVENIEKI KK</div>
-  <nav>
-    <a href="#par">Par mums</a>
-    <a href="#iespejas">Iespējas</a>
-    <a href="#galerija">Galerija / Foto</a>
-    <a href="#kontakti">Kontakti</a>
-    <a href="https://www.facebook.com/profile.php?id=61556553821904" target="_blank" rel="noopener">Facebook ↗</a>
-  </nav>
+  <div class="nav-wrap">
+    <a class="brand" href="#sakums" aria-label="Laivenieki sākums"><span class="brand-mark">L</span><span class="brand-name">LAIVENIEKI KK<span class="brand-sub">KREISAIS KRASTS</span></span></a>
+    <nav aria-label="Galvenā navigācija">
+      <a href="#par">Par mums</a><a href="#iespejas">Aktivitātes</a><a href="#galerija">Galerija</a><a href="#kontakti">Kontakti</a>
+      <a class="nav-cta" href="https://www.facebook.com/profile.php?id=61556553821904" target="_blank" rel="noopener">Facebook ↗</a>
+    </nav>
+  </div>
 </header>
-
 <main>
-
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-content reveal">
-    <div class="eyebrow">Liepājas ezera krastā</div>
-    <h1>Daba. Ūdens. Piedzīvojumi.</h1>
-    <p>
-      Atklāj atpūtas iespējas pie Liepājas ezera.
-      Izbaudi ūdeni, makšķerēšanu un skaistus mirkļus dabā.
-    </p>
-    <a class="btn" href="#iespejas">Atklāt iespējas</a>
-    <a class="btn btn-outline" href="tel:+37129987004">Sazināties</a>
-  </div>
-</div>
-
-<!-- ABOUT -->
-<section id="par">
-  <div class="heading">
-    <span>Laipni lūgti</span>
-    <h2>Laivenieki – Kreisais krasts</h2>
-    <p>
-      Atpūtas vieta pie Liepājas ezera, kur iespējams
-      baudīt ūdens aktivitātes un pavadīt laiku dabā.
-      Laipni gaidīti makšķernieki un ģimenes!
-    </p>
-  </div>
-</section>
-
-<!-- ACTIVITIES -->
-<section id="iespejas">
-  <div class="heading">
-    <span>Ko piedāvājam</span>
-    <h2>Atpūta un aktivitātes</h2>
-    <p>Izvēlies savu veidu, kā izbaudīt laiku pie ūdens.</p>
-  </div>
-
-  <div class="cards">
-    <article class="card">
-      <div class="symbol">🚣</div>
-      <h3>Laivu noma</h3>
-      <p>Dodieties izbraucienā pa Liepājas ezera ūdeņiem.</p>
-    </article>
-
-    <article class="card">
-      <div class="symbol">🌊</div>
-      <h3>SUP noma</h3>
-      <p>Izbaudi ūdeni un apkārtējo ainavu uz SUP dēļa.</p>
-    </article>
-
-    <article class="card">
-      <div class="symbol">🎣</div>
-      <h3>Makšķerēšana</h3>
-      <p>Atpūta un makšķerēšanas prieks pie ezera.</p>
-    </article>
-
-    <article class="card">
-      <div class="symbol">🛶</div>
-      <h3>Laivu ielaišana</h3>
-      <p>Laivu ielaišanas vieta Liepājas ezera apkārtnē.</p>
-    </article>
-  </div>
-</section>
-
-<!-- GALLERY -->
-<section class="dark" id="galerija">
-  <div class="heading">
-    <span>Foto mirkļi</span>
-    <h2>Galerija / Foto</h2>
-    <p>
-      Apskati Laivenieku fotogrāfijas.
-      Noklikšķini uz attēla, lai to aplūkotu lielākā izmērā.
-    </p>
-  </div>
-
-  <div class="gallery">
-
-    <button class="gallery-item" data-index="0" aria-label="Atvērt foto 1">
-      <img src="682239853_122298478886218460_8656357292084412713_n.jpg" alt="Laivenieki foto 1" loading="lazy">
-    </button>
-
-    <button class="gallery-item" data-index="1" aria-label="Atvērt foto 2">
-      <img src="695627977_122299668836218460_2055146594720851143_n.jpg" alt="Laivenieki foto 2" loading="lazy">
-    </button>
-
-    <button class="gallery-item" data-index="2" aria-label="Atvērt foto 3">
-      <img src="707694867_122301927794218460_5393489637262178326_n.jpg" alt="Laivenieki foto 3" loading="lazy">
-    </button>
-
-    <button class="gallery-item" data-index="3" aria-label="Atvērt foto 4">
-      <img src="741106047_122308061906218460_8988930842169452908_n.jpg" alt="Laivenieki foto 4" loading="lazy">
-    </button>
-
-    <button class="gallery-item" data-index="4" aria-label="Atvērt foto 5">
-      <img src="771939650_122312948822218460_8134656991320176299_n.jpg" alt="Laivenieki foto 5" loading="lazy">
-    </button>
-
-    <button class="gallery-item" data-index="5" aria-label="Atvērt foto 6">
-      <img src="772401694_122312948954218460_6106841970347393357_n.jpg" alt="Laivenieki foto 6" loading="lazy">
-    </button>
-
-    <button class="gallery-item" data-index="6" aria-label="Atvērt foto 7">
-      <img src="854418346_122323767602218460_5218023220984488718_n.jpg" alt="Laivenieki foto 7" loading="lazy">
-    </button>
-
-    <button class="gallery-item" data-index="7" aria-label="Atvērt foto 8">
-      <img src="867595195_122325780218218460_4353373484102423464_n.jpg" alt="Laivenieki foto 8" loading="lazy">
-    </button>
-
-    <button class="gallery-item" data-index="8" aria-label="Atvērt foto 9">
-      <img src="871891494_122325780512218460_2263707767782067007_n.jpg" alt="Laivenieki foto 9" loading="lazy">
-    </button>
-
-    <button class="gallery-item" data-index="9" aria-label="Atvērt foto 10">
-      <img src="872916045_122325780428218460_3247126897512626761_n.jpg" alt="Laivenieki foto 10" loading="lazy">
-    </button>
-
-    <button class="gallery-item" data-index="10" aria-label="Atvērt foto 11">
-      <img src="888033373_122327319974218460_1059013250245007257_n.jpg" alt="Laivenieki foto 11" loading="lazy">
-    </button>
-
-    <button class="gallery-item" data-index="11" aria-label="Atvērt foto 12">
-      <img src="890492274_122327344100218460_7988632327755467309_n.jpg" alt="Laivenieki foto 12" loading="lazy">
-    </button>
-
-    <button class="gallery-item" data-index="12" aria-label="Atvērt foto 13">
-      <img src="895089672_122327344316218460_2091257718626764083_n.jpg" alt="Laivenieki foto 13" loading="lazy">
-    </button>
-
-    <button class="gallery-item" data-index="13" aria-label="Atvērt foto 14">
-      <img src="897081826_122327344292218460_9009234826161396297_n.jpg" alt="Laivenieki foto 14" loading="lazy">
-    </button>
-
-    <button class="gallery-item" data-index="14" aria-label="Atvērt foto 15">
-      <img src="897281220_122327344304218460_3924559488531613535_n.jpg" alt="Laivenieki foto 15" loading="lazy">
-    </button>
-
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section class="contact" id="kontakti">
-  <div class="heading">
-    <span>Sazinies ar mums</span>
-    <h2>Plāno savu atpūtu!</h2>
-    <p>Jautājumiem un rezervācijām sazinies ar Laiveniekiem.</p>
-  </div>
-
-  <p><strong>Atpūtas vieta Laivenieki KK</strong></p>
-  <p>Tālrunis: <a href="tel:+37129987004">+371 29 987 004</a></p>
-
-  <a class="btn" href="tel:+37129987004">Zvanīt</a>
-
-  <a class="btn"
-     href="https://www.google.com/maps/search/?api=1&query=Atputa+vieta+Laivenieki+Kreisais+krasts"
-     target="_blank" rel="noopener">
-    Atrašanās vieta
-  </a>
-
-  <a class="btn"
-     href="https://www.facebook.com/profile.php?id=61556553821904"
-     target="_blank" rel="noopener">
-    Facebook lapa
-  </a>
-</section>
-
+  <section class="hero" id="sakums" aria-label="Laivenieki pie Liepājas ezera">
+    <div class="hero-inner">
+      <div class="kicker">Liepājas ezera krastā</div>
+      <h1>Atrodi savu<br>mieru pie ūdens.</h1>
+      <p class="hero-copy">Dabas tuvums, ezera plašums un atpūta svaigā gaisā. Laipni lūgti Laiveniekos — Kreisajā krastā!</p>
+      <div class="actions"><a class="btn btn-gold" href="#iespejas">Atklāt iespējas <span>→</span></a><a class="btn btn-glass" href="tel:+37129987004">Sazināties ar mums</a></div>
+    </div>
+    <div class="hero-note">Daba · Ūdens · Piedzīvojumi</div>
+  </section>
+  <div class="quickbar"><div class="quickbar-inner">
+    <div class="quick-item"><span class="quick-icon">⌁</span><span>Pie Liepājas ezera</span></div>
+    <div class="quick-item"><span class="quick-icon">♧</span><span>Atpūta dabā</span></div>
+    <div class="quick-item"><span class="quick-icon">♧</span><span>Ūdens aktivitātes</span></div>
+    <div class="quick-item"><span class="quick-icon">⚓</span><span>Laivu ielaišana</span></div>
+  </div></div>
+  <section id="par"><div class="section-inner about-grid">
+    <div class="about-copy"><div class="section-label">Laipni lūgti Laiveniekos</div><h2 class="section-title">Vieta, kur daba nosaka tempu.</h2>
+      <p class="section-intro">Laivenieki — Kreisais krasts ir atpūtas vieta pie Liepājas ezera. Šeit vari izbaudīt ūdens tuvumu, doties izbraucienā ar laivu, izmēģināt SUP vai vienkārši pavadīt laiku pie dabas.</p>
+      <div class="about-tag">Liepājas ezers · Kreisais krasts</div>
+    </div>
+    <div class="about-photo"><img src="695627977_122299668836218460_2055146594720851143_n.jpg" alt="Atpūta Laiveniekos pie ezera" loading="lazy"><div class="photo-frame"></div></div>
+  </div></section>
+  <section class="activities" id="iespejas"><div class="section-inner">
+    <div class="center-head"><div class="section-label">Izbaudi savu dienu</div><h2 class="section-title">Atpūtas iespējas</h2><p class="section-intro">Izvēlies, kā vēlies pavadīt laiku pie Liepājas ezera.</p></div>
+    <div class="activity-grid">
+      <article class="activity"><div class="activity-icon">♧</div><h3>Laivu noma</h3><p>Dodieties izbraucienā un iepazīstiet Liepājas ezeru no ūdens.</p></article>
+      <article class="activity"><div class="activity-icon">〰</div><h3>SUP noma</h3><p>Izbaudi mierīgu atpūtu uz ūdens un apkārtējo ainavu.</p></article>
+      <article class="activity"><div class="activity-icon">♧</div><h3>Makšķerēšana</h3><p>Laiks pie ezera makšķerēšanas cienītājiem un dabas baudītājiem.</p></article>
+      <article class="activity"><div class="activity-icon">⚓</div><h3>Laivu ielaišana</h3><p>Iespēja ielaist savu laivu Liepājas ezera ūdeņos.</p></article>
+    </div>
+  </div></section>
+  <section class="gallery-section" id="galerija"><div class="section-inner">
+    <div class="gallery-head"><div><div class="section-label">Ieskats Laiveniekos</div><h2 class="section-title">Galerija / Foto</h2></div><p class="section-intro">Apskati vietas fotogrāfijas un sajūti ezera atmosfēru. Izvēlies attēlu, lai aplūkotu to lielākā izmērā.</p></div>
+    <div class="gallery">
+      <button class="gallery-item" data-index="0" aria-label="Atvērt foto 1"><img src="682239853_122298478886218460_8656357292084412713_n.jpg" alt="Laivenieki foto 1" loading="lazy"></button>
+      <button class="gallery-item" data-index="1" aria-label="Atvērt foto 2"><img src="695627977_122299668836218460_2055146594720851143_n.jpg" alt="Laivenieki foto 2" loading="lazy"></button>
+      <button class="gallery-item" data-index="2" aria-label="Atvērt foto 3"><img src="707694867_122301927794218460_5393489637262178326_n.jpg" alt="Laivenieki foto 3" loading="lazy"></button>
+      <button class="gallery-item" data-index="3" aria-label="Atvērt foto 4"><img src="741106047_122308061906218460_8988930842169452908_n.jpg" alt="Laivenieki foto 4" loading="lazy"></button>
+      <button class="gallery-item" data-index="4" aria-label="Atvērt foto 5"><img src="771939650_122312948822218460_8134656991320176299_n.jpg" alt="Laivenieki foto 5" loading="lazy"></button>
+      <button class="gallery-item" data-index="5" aria-label="Atvērt foto 6"><img src="772401694_122312948954218460_6106841970347393357_n.jpg" alt="Laivenieki foto 6" loading="lazy"></button>
+      <button class="gallery-item" data-index="6" aria-label="Atvērt foto 7"><img src="854418346_122323767602218460_5218023220984488718_n.jpg" alt="Laivenieki foto 7" loading="lazy"></button>
+      <button class="gallery-item" data-index="7" aria-label="Atvērt foto 8"><img src="867595195_122325780218218460_4353373484102423464_n.jpg" alt="Laivenieki foto 8" loading="lazy"></button>
+      <button class="gallery-item" data-index="8" aria-label="Atvērt foto 9"><img src="871891494_122325780512218460_2263707767782067007_n.jpg" alt="Laivenieki foto 9" loading="lazy"></button>
+      <button class="gallery-item" data-index="9" aria-label="Atvērt foto 10"><img src="872916045_122325780428218460_3247126897512626761_n.jpg" alt="Laivenieki foto 10" loading="lazy"></button>
+      <button class="gallery-item" data-index="10" aria-label="Atvērt foto 11"><img src="888033373_122327319974218460_1059013250245007257_n.jpg" alt="Laivenieki foto 11" loading="lazy"></button>
+      <button class="gallery-item" data-index="11" aria-label="Atvērt foto 12"><img src="890492274_122327344100218460_7988632327755467309_n.jpg" alt="Laivenieki foto 12" loading="lazy"></button>
+      <button class="gallery-item" data-index="12" aria-label="Atvērt foto 13"><img src="895089672_122327344316218460_2091257718626764083_n.jpg" alt="Laivenieki foto 13" loading="lazy"></button>
+      <button class="gallery-item" data-index="13" aria-label="Atvērt foto 14"><img src="897081826_122327344292218460_9009234826161396297_n.jpg" alt="Laivenieki foto 14" loading="lazy"></button>
+      <button class="gallery-item" data-index="14" aria-label="Atvērt foto 15"><img src="897281220_122327344304218460_3924559488531613535_n.jpg" alt="Laivenieki foto 15" loading="lazy"></button>
+    </div>
+    <div class="gallery-more">15 fotogrāfijas · Laivenieki KK</div>
+  </div></section>
+  <section class="contact-section" id="kontakti"><div class="section-inner contact-panel">
+    <div><div class="section-label">Sazinies ar mums</div><h2>Plāno savu nākamo<br>atpūtu pie ezera?</h2><p>Ja vēlies uzzināt vairāk par laivu vai SUP nomu un atpūtas iespējām, sazinies ar Laiveniekiem.</p>
+      <div class="contact-actions"><a class="btn btn-gold" href="tel:+37129987004">Zvanīt tagad →</a><a class="btn btn-glass" href="https://www.facebook.com/profile.php?id=61556553821904" target="_blank" rel="noopener">Rakstīt Facebook</a></div>
+    </div>
+    <div class="contact-details">
+      <div class="detail"><small>Atpūtas vieta</small><span>Laivenieki KK — Kreisais krasts</span></div>
+      <div class="detail"><small>Tālrunis</small><a href="tel:+37129987004">+371 29 987 004</a></div>
+      <div class="detail"><small>Atrašanās vieta</small><a href="https://www.google.com/maps/search/?api=1&query=Atputa+vieta+Laivenieki+Kreisais+krasts" target="_blank" rel="noopener">Atvērt kartē ↗</a></div>
+    </div>
+  </div></section>
 </main>
-
-<footer>
-  © 2026 Laivenieki KK · Daba. Ūdens. Piedzīvojumi.
-  <br><br>
-  <a href="https://www.facebook.com/profile.php?id=61556553821904" target="_blank" rel="noopener">
-    Atrodi mūs Facebook
-  </a>
-</footer>
-
-<!-- FULLSCREEN PHOTO VIEWER -->
+<footer><div class="footer-inner"><span>© 2026 LAIVENIEKI KK · DABA. ŪDENS. PIEDZĪVOJUMI.</span><a href="https://www.facebook.com/profile.php?id=61556553821904" target="_blank" rel="noopener">Facebook lapa ↗</a></div></footer>
 <div class="viewer" id="photoViewer" role="dialog" aria-modal="true" aria-label="Foto galerija">
-  <button class="viewer-close" id="closeViewer" aria-label="Aizvērt">&times;</button>
-  <button class="viewer-prev" id="prevPhoto" aria-label="Iepriekšējais foto">&#8249;</button>
-
-  <div class="viewer-content">
-    <img id="largePhoto" src="" alt="Laivenieki foto">
-    <div class="viewer-count" id="photoCount"></div>
-  </div>
-
-  <button class="viewer-next" id="nextPhoto" aria-label="Nākamais foto">&#8250;</button>
+  <button class="viewer-close" id="closeViewer" aria-label="Aizvērt">&times;</button><button class="viewer-prev" id="prevPhoto" aria-label="Iepriekšējais foto">‹</button>
+  <div class="viewer-content"><img id="largePhoto" src="" alt="Laivenieki foto"><div class="viewer-count" id="photoCount"></div></div>
+  <button class="viewer-next" id="nextPhoto" aria-label="Nākamais foto">›</button>
 </div>
-
 <script>
-const photos = [
-  "682239853_122298478886218460_8656357292084412713_n.jpg",
-  "695627977_122299668836218460_2055146594720851143_n.jpg",
-  "707694867_122301927794218460_5393489637262178326_n.jpg",
-  "741106047_122308061906218460_8988930842169452908_n.jpg",
-  "771939650_122312948822218460_8134656991320176299_n.jpg",
-  "772401694_122312948954218460_6106841970347393357_n.jpg",
-  "854418346_122323767602218460_5218023220984488718_n.jpg",
-  "867595195_122325780218218460_4353373484102423464_n.jpg",
-  "871891494_122325780512218460_2263707767782067007_n.jpg",
-  "872916045_122325780428218460_3247126897512626761_n.jpg",
-  "888033373_122327319974218460_1059013250245007257_n.jpg",
-  "890492274_122327344100218460_7988632327755467309_n.jpg",
-  "895089672_122327344316218460_2091257718626764083_n.jpg",
-  "897081826_122327344292218460_9009234826161396297_n.jpg",
-  "897281220_122327344304218460_3924559488531613535_n.jpg"
+const photos=[
+"682239853_122298478886218460_8656357292084412713_n.jpg",
+"695627977_122299668836218460_2055146594720851143_n.jpg",
+"707694867_122301927794218460_5393489637262178326_n.jpg",
+"741106047_122308061906218460_8988930842169452908_n.jpg",
+"771939650_122312948822218460_8134656991320176299_n.jpg",
+"772401694_122312948954218460_6106841970347393357_n.jpg",
+"854418346_122323767602218460_5218023220984488718_n.jpg",
+"867595195_122325780218218460_4353373484102423464_n.jpg",
+"871891494_122325780512218460_2263707767782067007_n.jpg",
+"872916045_122325780428218460_3247126897512626761_n.jpg",
+"888033373_122327319974218460_1059013250245007257_n.jpg",
+"890492274_122327344100218460_7988632327755467309_n.jpg",
+"895089672_122327344316218460_2091257718626764083_n.jpg",
+"897081826_122327344292218460_9009234826161396297_n.jpg",
+"897281220_122327344304218460_3924559488531613535_n.jpg"
 ];
-
-const viewer = document.getElementById("photoViewer");
-const largePhoto = document.getElementById("largePhoto");
-const photoCount = document.getElementById("photoCount");
-
-let currentPhoto = 0;
-
-function showPhoto(index) {
-  currentPhoto = (index + photos.length) % photos.length;
-  largePhoto.src = photos[currentPhoto];
-  largePhoto.alt = "Laivenieki foto " + (currentPhoto + 1);
-  photoCount.textContent =
-    (currentPhoto + 1) + " / " + photos.length;
-}
-
-function openViewer(index) {
-  showPhoto(index);
-  viewer.classList.add("active");
-  document.body.classList.add("viewer-open");
-  document.getElementById("closeViewer").focus();
-}
-
-function closeViewer() {
-  viewer.classList.remove("active");
-  document.body.classList.remove("viewer-open");
-}
-
-document.querySelectorAll(".gallery-item").forEach(button => {
-  button.addEventListener("click", () => {
-    openViewer(Number(button.dataset.index));
-  });
-});
-
-document.getElementById("closeViewer").addEventListener("click", closeViewer);
-
-document.getElementById("prevPhoto").addEventListener("click", () => {
-  showPhoto(currentPhoto - 1);
-});
-
-document.getElementById("nextPhoto").addEventListener("click", () => {
-  showPhoto(currentPhoto + 1);
-});
-
-viewer.addEventListener("click", event => {
-  if (event.target === viewer) closeViewer();
-});
-
-document.addEventListener("keydown", event => {
-  if (!viewer.classList.contains("active")) return;
-
-  if (event.key === "Escape") closeViewer();
-  if (event.key === "ArrowLeft") showPhoto(currentPhoto - 1);
-  if (event.key === "ArrowRight") showPhoto(currentPhoto + 1);
-});
+const viewer=document.getElementById("photoViewer");
+const largePhoto=document.getElementById("largePhoto");
+const photoCount=document.getElementById("photoCount");
+let currentPhoto=0;
+function showPhoto(index){currentPhoto=(index+photos.length)%photos.length;largePhoto.src=photos[currentPhoto];largePhoto.alt="Laivenieki foto "+(currentPhoto+1);photoCount.textContent=(currentPhoto+1)+" / "+photos.length}
+function openViewer(index){showPhoto(index);viewer.classList.add("active");document.body.classList.add("viewer-open");document.getElementById("closeViewer").focus()}
+function closeViewer(){viewer.classList.remove("active");document.body.classList.remove("viewer-open")}
+document.querySelectorAll(".gallery-item").forEach(button=>button.addEventListener("click",()=>openViewer(Number(button.dataset.index))));
+document.getElementById("closeViewer").addEventListener("click",closeViewer);
+document.getElementById("prevPhoto").addEventListener("click",()=>showPhoto(currentPhoto-1));
+document.getElementById("nextPhoto").addEventListener("click",()=>showPhoto(currentPhoto+1));
+viewer.addEventListener("click",event=>{if(event.target===viewer)closeViewer()});
+document.addEventListener("keydown",event=>{if(!viewer.classList.contains("active"))return;if(event.key==="Escape")closeViewer();if(event.key==="ArrowLeft")showPhoto(currentPhoto-1);if(event.key==="ArrowRight")showPhoto(currentPhoto+1)});
 </script>
-
 </body>
 </html>
